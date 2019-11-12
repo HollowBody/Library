@@ -29,22 +29,21 @@
         private void InitializeComponent()
         {
             this.AddButton = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.BooksGrid = new System.Windows.Forms.DataGridView();
             this.NameField = new System.Windows.Forms.TextBox();
             this.AuthorField = new System.Windows.Forms.TextBox();
-            this.DateFromField = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.DeleteButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.CostField = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.IssueDateField = new System.Windows.Forms.DateTimePicker();
+            ((System.ComponentModel.ISupportInitialize)(this.BooksGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(612, 264);
+            this.AddButton.Location = new System.Drawing.Point(702, 265);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(75, 23);
             this.AddButton.TabIndex = 0;
@@ -52,13 +51,13 @@
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButtonOnClick);
             // 
-            // dataGridView1
+            // BooksGrid
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(765, 247);
-            this.dataGridView1.TabIndex = 1;
+            this.BooksGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.BooksGrid.Location = new System.Drawing.Point(12, 12);
+            this.BooksGrid.Name = "BooksGrid";
+            this.BooksGrid.Size = new System.Drawing.Size(765, 247);
+            this.BooksGrid.TabIndex = 1;
             // 
             // NameField
             // 
@@ -73,13 +72,6 @@
             this.AuthorField.Name = "AuthorField";
             this.AuthorField.Size = new System.Drawing.Size(100, 20);
             this.AuthorField.TabIndex = 3;
-            // 
-            // DateFromField
-            // 
-            this.DateFromField.Location = new System.Drawing.Point(361, 266);
-            this.DateFromField.Name = "DateFromField";
-            this.DateFromField.Size = new System.Drawing.Size(100, 20);
-            this.DateFromField.TabIndex = 4;
             // 
             // label1
             // 
@@ -108,51 +100,48 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "Год";
             // 
-            // DeleteButton
+            // CostField
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(695, 264);
-            this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(75, 23);
-            this.DeleteButton.TabIndex = 8;
-            this.DeleteButton.Text = "Удалить";
-            this.DeleteButton.UseVisualStyleBackColor = true;
-            this.DeleteButton.Click += new System.EventHandler(this.DeleteButtonOnClick);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(506, 266);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 9;
+            this.CostField.Location = new System.Drawing.Point(596, 267);
+            this.CostField.Name = "CostField";
+            this.CostField.Size = new System.Drawing.Size(100, 20);
+            this.CostField.TabIndex = 9;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(468, 269);
+            this.label4.Location = new System.Drawing.Point(557, 269);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(33, 13);
             this.label4.TabIndex = 10;
             this.label4.Text = "Цена";
             // 
-            // Books
+            // IssueDateField
+            // 
+            this.IssueDateField.Location = new System.Drawing.Point(361, 266);
+            this.IssueDateField.Name = "IssueDateField";
+            this.IssueDateField.Size = new System.Drawing.Size(190, 20);
+            this.IssueDateField.TabIndex = 11;
+            // 
+            // BooksView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(789, 293);
+            this.Controls.Add(this.IssueDateField);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.DeleteButton);
+            this.Controls.Add(this.CostField);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.DateFromField);
             this.Controls.Add(this.AuthorField);
             this.Controls.Add(this.NameField);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.BooksGrid);
             this.Controls.Add(this.AddButton);
-            this.Name = "Books";
+            this.Name = "BooksView";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.BooksViewOnLoad);
+            ((System.ComponentModel.ISupportInitialize)(this.BooksGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,16 +150,15 @@
         #endregion
 
         private System.Windows.Forms.Button AddButton;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView BooksGrid;
         private System.Windows.Forms.TextBox NameField;
         private System.Windows.Forms.TextBox AuthorField;
-        private System.Windows.Forms.TextBox DateFromField;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button DeleteButton;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox CostField;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DateTimePicker IssueDateField;
     }
 }
 
