@@ -152,6 +152,7 @@
             this.Controls.Add(this.AddButton);
             this.Name = "AccountsView";
             this.Text = "Accounts";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccountsViewOnFormClosing);
             this.Load += new System.EventHandler(this.AccountsViewOnLoad);
             ((System.ComponentModel.ISupportInitialize)(this.AccountsGrid)).EndInit();
             this.ResumeLayout(false);

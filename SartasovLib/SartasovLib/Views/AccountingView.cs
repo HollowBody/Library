@@ -16,5 +16,11 @@ namespace SartasovLib.Views
         {
             InitializeComponent();
         }
+
+        private void AccountingViewOnFormClosing(object sender, FormClosingEventArgs e)
+        {
+            Owner.Show();
+            Owner.Refresh();
+        }
     }
 }

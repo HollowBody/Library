@@ -124,6 +124,10 @@ namespace SartasovLib.Views
 
         }
 
-
+        private void AccountsViewOnFormClosing(object sender, FormClosingEventArgs e)
+        {
+            Owner.Show();
+            Owner.Refresh();
+        }
     }
 }

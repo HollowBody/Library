@@ -83,6 +83,12 @@ namespace SartasovLib
         {
 
         }
+
+        private void BooksViewOnFormClosing(object sender, FormClosingEventArgs e)
+        {
+            Owner.Show();
+            Owner.Refresh();
+        }
     }
 
 }

@@ -26,5 +26,11 @@ namespace SartasovLib.Views
         {
 
         }
+
+        private void PenaltiesAccountingViewOnFormClosing(object sender, FormClosingEventArgs e)
+        {
+            Owner.Show();
+            Owner.Refresh();
+        }
     }
 }

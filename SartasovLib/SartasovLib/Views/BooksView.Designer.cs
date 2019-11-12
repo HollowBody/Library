@@ -140,6 +140,7 @@
             this.Controls.Add(this.AddButton);
             this.Name = "BooksView";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BooksViewOnFormClosing);
             this.Load += new System.EventHandler(this.BooksViewOnLoad);
             ((System.ComponentModel.ISupportInitialize)(this.BooksGrid)).EndInit();
             this.ResumeLayout(false);

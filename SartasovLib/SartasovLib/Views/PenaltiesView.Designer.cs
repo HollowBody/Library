@@ -29,13 +29,12 @@
         private void InitializeComponent()
         {
             this.AddButton = new System.Windows.Forms.Button();
-            this.DeleteButton = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.PenaltiesGrid = new System.Windows.Forms.DataGridView();
             this.TypeField = new System.Windows.Forms.TextBox();
-            this.DateField = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.DateField = new System.Windows.Forms.DateTimePicker();
+            ((System.ComponentModel.ISupportInitialize)(this.PenaltiesGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // AddButton
@@ -46,42 +45,27 @@
             this.AddButton.TabIndex = 0;
             this.AddButton.Text = "Добавить";
             this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.AddButtonOnClick);
             // 
-            // DeleteButton
+            // PenaltiesGrid
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(15, 282);
-            this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(75, 23);
-            this.DeleteButton.TabIndex = 1;
-            this.DeleteButton.Text = "Удалить";
-            this.DeleteButton.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(15, 39);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(482, 208);
-            this.dataGridView1.TabIndex = 4;
+            this.PenaltiesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.PenaltiesGrid.Location = new System.Drawing.Point(15, 39);
+            this.PenaltiesGrid.Name = "PenaltiesGrid";
+            this.PenaltiesGrid.Size = new System.Drawing.Size(482, 208);
+            this.PenaltiesGrid.TabIndex = 4;
             // 
             // TypeField
             // 
-            this.TypeField.Location = new System.Drawing.Point(191, 254);
+            this.TypeField.Location = new System.Drawing.Point(131, 254);
             this.TypeField.Name = "TypeField";
             this.TypeField.Size = new System.Drawing.Size(100, 20);
             this.TypeField.TabIndex = 5;
             // 
-            // DateField
-            // 
-            this.DateField.Location = new System.Drawing.Point(190, 285);
-            this.DateField.Name = "DateField";
-            this.DateField.Size = new System.Drawing.Size(100, 20);
-            this.DateField.TabIndex = 6;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(138, 257);
+            this.label2.Location = new System.Drawing.Point(101, 257);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(26, 13);
             this.label2.TabIndex = 7;
@@ -90,27 +74,35 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(137, 288);
+            this.label3.Location = new System.Drawing.Point(242, 258);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "Дата от";
             // 
-            // Penalties
+            // DateField
+            // 
+            this.DateField.Location = new System.Drawing.Point(295, 254);
+            this.DateField.Name = "DateField";
+            this.DateField.Size = new System.Drawing.Size(200, 20);
+            this.DateField.TabIndex = 9;
+            // 
+            // PenaltiesView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(516, 322);
+            this.ClientSize = new System.Drawing.Size(516, 289);
+            this.Controls.Add(this.DateField);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.DateField);
             this.Controls.Add(this.TypeField);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.DeleteButton);
+            this.Controls.Add(this.PenaltiesGrid);
             this.Controls.Add(this.AddButton);
-            this.Name = "Penalties";
+            this.Name = "PenaltiesView";
             this.Text = "Penalties";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PenaltiesViewOnFormClosing);
+            this.Load += new System.EventHandler(this.PenaltiesViewOnLoad);
+            ((System.ComponentModel.ISupportInitialize)(this.PenaltiesGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,11 +111,10 @@
         #endregion
 
         private System.Windows.Forms.Button AddButton;
-        private System.Windows.Forms.Button DeleteButton;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView PenaltiesGrid;
         private System.Windows.Forms.TextBox TypeField;
-        private System.Windows.Forms.TextBox DateField;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker DateField;
     }
 }

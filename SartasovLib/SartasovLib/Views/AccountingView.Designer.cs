@@ -40,14 +40,15 @@
             this.dataGridView1.Size = new System.Drawing.Size(776, 266);
             this.dataGridView1.TabIndex = 0;
             // 
-            // Accounting
+            // AccountingView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "Accounting";
+            this.Name = "AccountingView";
             this.Text = "Accounting";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccountingViewOnFormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
