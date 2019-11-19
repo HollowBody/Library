@@ -28,6 +28,60 @@ namespace LibraryApi.Controllers
             return await _context.PenaltiesAccountings.ToListAsync();
         }
 
+        // GET: api/AccountInfo
+        [HttpGet]
+        [Route("GetAccountsInfo")]
+        public async Task<ActionResult<IEnumerable<AccountInfo>>> GetAccountsInfo()
+        {
+            var accountsInfo = await _context.LibraryAccounts.Select(x => new AccountInfo
+            {
+                AccountID = x.AccountID,
+                AccountData = $"{x.AccountNumber}|{x.FirstName}|{x.SurName}"
+            }
+            ).ToListAsync();
+
+            return accountsInfo;
+        }
+
+        // GET: api/AccountInfo
+        [HttpGet]
+        [Route("GetPenaltiesAccountingsInfo")]
+        public async Task<ActionResult<IEnumerable<PenaltiesAccountingsInfo>>> GetPenaltiesAccountingsInfo()
+        {
+            var accountsInfo = await _context.PenaltiesAccountings
+                .Join(
+                    _context.LibraryAccounts,
+                    penaltiesAccountings => penaltiesAccountings.AccountID,
+                    libraryAccounts => libraryAccounts.AccountID,
+                    (penaltiesAccountings, libraryAccounts) => new
+                    { 
+                        penaltiesAccountings, 
+                        libraryAccounts 
+                    })
+                .Join(
+                    _context.Penalties, 
+                    penaltiesAccountings => penaltiesAccountings.penaltiesAccountings.PenaltyID, 
+                    penalties => penalties.PenaltyID, 
+                    (penaltiesAccountings, penalties) => new 
+                    { 
+                        penaltiesAccountings, 
+                        penalties 
+                    })                
+                .Select(penaltiesAccountingsInfo => new PenaltiesAccountingsInfo
+                {
+                    PenaltiesAccountingID = penaltiesAccountingsInfo.penaltiesAccountings.penaltiesAccountings.PenaltiesAccountingID,
+                    AccountNumber = penaltiesAccountingsInfo.penaltiesAccountings.libraryAccounts.AccountNumber,
+                    FirstName = penaltiesAccountingsInfo.penaltiesAccountings.libraryAccounts.FirstName,
+                    SurName = penaltiesAccountingsInfo.penaltiesAccountings.libraryAccounts.SurName,
+                    Type = penaltiesAccountingsInfo.penalties.Type,
+                    Sum = penaltiesAccountingsInfo.penaltiesAccountings.penaltiesAccountings.Sum,
+                    Date = penaltiesAccountingsInfo.penaltiesAccountings.penaltiesAccountings.Date
+                }
+            ).ToListAsync();
+
+            return accountsInfo;
+        }
+
         // GET: api/PenaltiesAccountings/5
         [HttpGet("{id}")]
         public async Task<ActionResult<PenaltiesAccounting>> GetPenaltiesAccounting(int id)

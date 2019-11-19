@@ -42,10 +42,11 @@ namespace SartasovLib.Views
         private void InitializeView()
         {
             AccountsGrid.Columns[0].HeaderText = @"№";
-            AccountsGrid.Columns[1].HeaderText = @"Фамилия";
-            AccountsGrid.Columns[2].HeaderText = @"Имя";
+            AccountsGrid.Columns[1].HeaderText = @"Абонемент";
+            AccountsGrid.Columns[2].Visible =false;
             AccountsGrid.Columns[3].Visible = false;
-            AccountsGrid.Columns[4].Visible = false;
+            AccountsGrid.Columns[4].HeaderText = @"Имя";
+            AccountsGrid.Columns[5].HeaderText = @"Фамилия";
             AccountsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         private async void AddButtonOnClick(object sender, EventArgs e)

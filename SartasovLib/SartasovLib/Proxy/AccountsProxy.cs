@@ -37,7 +37,7 @@ namespace SartasovLib.Proxy
         {
             var jsonString = JsonConvert.SerializeObject(libraryAccount);
             var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync("/api/LibraryAccount", content);
+            var response = await httpClient.PostAsync("/api/LibraryAccounts", content);
             var code = response.StatusCode;
             var result = responseReader.ReadObjectAsync<LibraryAccount>(response);
             if (code == (HttpStatusCode)200)
