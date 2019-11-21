@@ -1,5 +1,6 @@
 ﻿using LibraryApi.Models;
 using Newtonsoft.Json;
+using SartasovLib.Models;
 using SartasovLib.Serializer;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,14 @@ namespace SartasovLib.Proxy
                 return await result;
             }
             return null;
+        }
+        public async Task<IEnumerable<BooksInfo>> GetBooksInfo()
+        {
+            //var booksResponse = await httpClient.GetAsync("api/Books");
+            var booksInfoResponse = await httpClient.GetStringAsync("api/Books/GetBookInfo");
+            //return await responseReader.ReadArrayAsync<Book>(booksResponse);
+            var booksInfo = JsonConvert.DeserializeObject<List<BooksInfo>>(booksInfoResponse);
+            return booksInfo;
         }
     }
 }

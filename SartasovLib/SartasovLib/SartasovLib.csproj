@@ -56,13 +56,16 @@
   <ItemGroup>
     <Compile Include="Models\AccountInfo.cs" />
     <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\BooksInfo.cs" />
     <Compile Include="Models\LibraryAccount.cs" />
     <Compile Include="Models\LibraryAccounting.cs" />
+    <Compile Include="Models\LibraryAccountingInfo.cs" />
     <Compile Include="Models\PenaltiesAccounting.cs" />
     <Compile Include="Models\PenaltiesAccountingsInfo.cs" />
     <Compile Include="Models\Penalty.cs" />
     <Compile Include="Proxy\AccountsProxy.cs" />
     <Compile Include="Proxy\BooksProxy.cs" />
+    <Compile Include="Proxy\LibraryAccountingProxy.cs" />
     <Compile Include="Proxy\PenaltiesAccountingProxy.cs" />
     <Compile Include="Proxy\PenaltiesProxy.cs" />
     <Compile Include="Serializer\ResponseReader.cs" />

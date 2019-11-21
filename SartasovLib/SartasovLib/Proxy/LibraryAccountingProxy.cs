@@ -13,45 +13,44 @@ using System.Threading.Tasks;
 
 namespace SartasovLib.Proxy
 {
-    public class PenaltiesAccountingProxy
+    class LibraryAccountingProxy
     {
         HttpClient httpClient;
         ResponseReader responseReader;
-
-        public PenaltiesAccountingProxy()
+        public LibraryAccountingProxy()
         {
             httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri("https://localhost:44315/");
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             responseReader = new ResponseReader();
         }
-        public async Task<IEnumerable<PenaltiesAccounting>> GetPenaltiesAccounting()
+        public async Task<IEnumerable<LibraryAccounting>> GetLibraryAccountings()
         {
             //var booksResponse = await httpClient.GetAsync("api/Books");
-            var penaltiesAccountingResponse = await httpClient.GetStringAsync("api/PenaltiesAccountings");
+            var libraryAccountingsResponse = await httpClient.GetStringAsync("api/LibraryAccountings");
             //return await responseReader.ReadArrayAsync<Book>(booksResponse);
-            var penaltiesAccounting = JsonConvert.DeserializeObject<List<PenaltiesAccounting>>(penaltiesAccountingResponse);
-            return penaltiesAccounting;
+            var libraryAccountings = JsonConvert.DeserializeObject<List<LibraryAccounting>>(libraryAccountingsResponse);
+            return libraryAccountings;
         }
-        public async Task<PenaltiesAccounting> AddPenaltiesAccounting(PenaltiesAccounting penaltiesAccounting)
+        public async Task<LibraryAccounting> AddLibraryAccounting(LibraryAccounting libraryAccounting)
         {
-            var jsonString = JsonConvert.SerializeObject(penaltiesAccounting);
+            var jsonString = JsonConvert.SerializeObject(libraryAccounting);
             var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync("/api/PenaltiesAccountings", content);
+            var response = await httpClient.PostAsync("/api/LibraryAccountings", content);
             var code = response.StatusCode;
-            var result = responseReader.ReadObjectAsync<PenaltiesAccounting>(response);
+            var result = responseReader.ReadObjectAsync<LibraryAccounting>(response);
             if (code == (HttpStatusCode)200)
             {
                 return await result;
             }
             return null;
-        }        
-        public async Task<IEnumerable<PenaltiesAccountingsInfo>> GetPenaltiesAccountingsInfo()
+        }
+        public async Task<IEnumerable<LibraryAccountingInfo>> GetLibraryAccountingsInfo()
         {
             //var booksResponse = await httpClient.GetAsync("api/Books");
-            var penaltiesAccountingInfoResponse = await httpClient.GetStringAsync("api/PenaltiesAccountings/GetPenaltiesAccountingsInfo");
+            var libraryAccountingInfoResponse = await httpClient.GetStringAsync("api/LibraryAccountings/GetLibraryAccountingInfo");
             //return await responseReader.ReadArrayAsync<Book>(booksResponse);
-            var penaltiesAccounting = JsonConvert.DeserializeObject<List<PenaltiesAccountingsInfo>>(penaltiesAccountingInfoResponse);
+            var penaltiesAccounting = JsonConvert.DeserializeObject<List<LibraryAccountingInfo>>(libraryAccountingInfoResponse);
             return penaltiesAccounting;
         }
     }

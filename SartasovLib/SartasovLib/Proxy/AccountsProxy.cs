@@ -1,5 +1,6 @@
 ﻿using LibraryApi.Models;
 using Newtonsoft.Json;
+using SartasovLib.Models;
 using SartasovLib.Serializer;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,14 @@ namespace SartasovLib.Proxy
             //return await responseReader.ReadArrayAsync<Book>(booksResponse);
             var libraryAccounts = JsonConvert.DeserializeObject<List<LibraryAccount>>(libraryAccountsResponse);
             return libraryAccounts;
+        }
+        public async Task<IEnumerable<AccountInfo>> GetAccountsInfo()
+        {
+            //var booksResponse = await httpClient.GetAsync("api/Books");
+            var accountsInfoResponse = await httpClient.GetStringAsync("api/LibraryAccounts/GetAccountsInfo");
+            //return await responseReader.ReadArrayAsync<Book>(booksResponse);
+            var penaltiesAccounting = JsonConvert.DeserializeObject<List<AccountInfo>>(accountsInfoResponse);
+            return penaltiesAccounting;
         }
         public async Task<LibraryAccount> AddLibraryAccount(LibraryAccount libraryAccount)
         {

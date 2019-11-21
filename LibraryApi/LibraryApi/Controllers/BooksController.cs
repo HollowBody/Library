@@ -28,6 +28,21 @@ namespace LibraryApi.Controllers
             return await _context.Books.ToListAsync();
         }
 
+        // GET: api/Books/GetBookInfo
+        [HttpGet]
+        [Route("GetBookInfo")]
+        public async Task<ActionResult<IEnumerable<BooksInfo>>> GetBookInfo()
+        {
+            var booksInfo = await _context.Books.Select(x => new BooksInfo
+            {
+                BookID = x.BookID,
+                BookData = $"{x.Name}| {x.Author}| {x.IssueDate.Date}"
+            }
+            ).ToListAsync();
+
+            return booksInfo;
+        }
+
         // GET: api/Books/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Book>> GetBook(int id)

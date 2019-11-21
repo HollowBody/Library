@@ -27,6 +27,20 @@ namespace LibraryApi.Controllers
         {
             return await _context.LibraryAccounts.ToListAsync();
         }
+        // GET: api/LibraryAccounts/AccountInfo
+        [HttpGet]
+        [Route("GetAccountsInfo")]
+        public async Task<ActionResult<IEnumerable<AccountInfo>>> GetAccountsInfo()
+        {
+            var accountsInfo = await _context.LibraryAccounts.Select(x => new AccountInfo
+            {
+                AccountID = x.AccountID,
+                AccountData = $"{x.AccountNumber}|{x.FirstName}|{x.SurName}"
+            }
+            ).ToListAsync();
+
+            return accountsInfo;
+        }
 
         // GET: api/LibraryAccounts/5
         [HttpGet("{id}")]

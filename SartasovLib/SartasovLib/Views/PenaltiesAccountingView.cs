@@ -18,11 +18,13 @@ namespace SartasovLib.Views
     {
         private PenaltiesAccountingProxy _penaltiesAccountingProxy;
         private PenaltiesProxy _penaltiesProxy;
+        private AccountsProxy _accountsProxy;
         public PenaltiesAccountingView()
         {
             InitializeComponent();
             _penaltiesAccountingProxy = new PenaltiesAccountingProxy();
             _penaltiesProxy = new PenaltiesProxy();
+            _accountsProxy = new AccountsProxy();
         }
         private async void PenaltiesAccountingViewOnLoad(object sender, EventArgs e)
         {
@@ -57,12 +59,11 @@ namespace SartasovLib.Views
         }
         private async Task AccountsLoad()
         {
-            var accounts = await _penaltiesAccountingProxy.GetAccountsInfo();
+            var accounts = await _accountsProxy.GetAccountsInfo();
             //_accountsBindingSource.DataSource = accounts;
             AccountsDrop.DataSource = accounts;
             AccountsDrop.DisplayMember = "AccountData";
             AccountsDrop.ValueMember = "AccountID";
-
         }
         private async Task PenaltyTypeLoad()
         {
@@ -71,7 +72,6 @@ namespace SartasovLib.Views
             TypeDrop.DataSource = penalties;
             TypeDrop.DisplayMember = "Type";
             TypeDrop.ValueMember = "PenaltyID";
-
         }
 
         private async void AddButtonOnClick(object sender, EventArgs e)

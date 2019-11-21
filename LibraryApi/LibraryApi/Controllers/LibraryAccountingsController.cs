@@ -27,6 +27,45 @@ namespace LibraryApi.Controllers
         {
             return await _context.LibraryAccounting.ToListAsync();
         }
+        // GET: api/AccountInfo
+        [HttpGet]
+        [Route("GetLibraryAccountingInfo")]
+        public async Task<ActionResult<IEnumerable<LibraryAccountingInfo>>> GetLibraryAccountingInfo()
+        {
+            var accountsInfo = await _context.LibraryAccounting
+                .Join(
+                    _context.LibraryAccounts,
+                    libraryAccountings => libraryAccountings.AccountID,
+                    libraryAccounts => libraryAccounts.AccountID,
+                    (libraryAccountings, libraryAccounts) => new
+                    {
+                        libraryAccountings,
+                        libraryAccounts
+                    })
+                .Join(
+                    _context.Books,
+                    libraryAccountings => libraryAccountings.libraryAccountings.BookID,
+                    books => books.BookID,
+                    (libraryAccountings, books) => new
+                    {
+                        libraryAccountings,
+                        books
+                    })
+                .Select(libraryAccountingsInfo => new LibraryAccountingInfo
+                {
+                    LibraryAccountingID = libraryAccountingsInfo.libraryAccountings.libraryAccountings.LibraryAccountingID,
+                    Type = libraryAccountingsInfo.libraryAccountings.libraryAccountings.Type,
+                    BookInfo = $"{ libraryAccountingsInfo.books.Author }| { libraryAccountingsInfo.books.Name }| {libraryAccountingsInfo.books.IssueDate}",
+                    AccountInfo = $"{libraryAccountingsInfo.libraryAccountings.libraryAccounts.AccountNumber}|" +
+                    $"{libraryAccountingsInfo.libraryAccountings.libraryAccounts.FirstName}|" +
+                    $"{libraryAccountingsInfo.libraryAccountings.libraryAccounts.SurName}",                    
+                    IssueDate = libraryAccountingsInfo.libraryAccountings.libraryAccountings.IssueDate,
+                    CompletionDate = libraryAccountingsInfo.libraryAccountings.libraryAccountings.CompletionDate
+                }
+            ).ToListAsync();
+
+            return accountsInfo;
+        }
 
         // GET: api/LibraryAccountings/5
         [HttpGet("{id}")]
