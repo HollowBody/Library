@@ -19,15 +19,8 @@ namespace SartasovLib
         }
         private async void BooksViewOnLoad(object sender, EventArgs e)
         {
-            try
-            {
-                await LoadData();
-                InitializeView();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка:Отсутствует подключение к Базе данных. \n{ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            await LoadData();
+            InitializeView();
         }
         private async Task LoadData()
         {
@@ -53,16 +46,9 @@ namespace SartasovLib
         }
         private async void AddButtonOnClick(object sender, EventArgs e)
         {
-            try
-            {
-                await PostBook();
-                await LoadData();
-                InitializeView();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка:Отсутствует подключение к Базе данных. \n{ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            await PostBook();
+            await LoadData();
+            InitializeView();
         }
 
         private async Task PostBook()

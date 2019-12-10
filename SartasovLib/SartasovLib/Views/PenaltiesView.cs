@@ -23,15 +23,8 @@ namespace SartasovLib.Views
         }
         private async void PenaltiesViewOnLoad(object sender, EventArgs e)
         {
-            try
-            {
-                await LoadData();
-                InitializeView();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка:Отсутствует подключение к Базе данных. \n{ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            await LoadData();
+            InitializeView();
         }
         private async Task LoadData()
         {
@@ -55,16 +48,9 @@ namespace SartasovLib.Views
         }
         private async void AddButtonOnClick(object sender, EventArgs e)
         {
-            try
-            {
-                await PostPenalty();
-                await LoadData();
-                InitializeView();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка:Отсутствует подключение к Базе данных. \n{ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            await PostPenalty();
+            await LoadData();
+            InitializeView();
         }
         private async Task PostPenalty()
         {
@@ -72,8 +58,8 @@ namespace SartasovLib.Views
             {
                 Penalty penalty = new Penalty
                 {
-                    DateFrom = DateField.Value,
-                    Type = TypeField.Text
+                   DateFrom = DateField.Value,
+                   Type = TypeField.Text
                 };
                 try
                 {

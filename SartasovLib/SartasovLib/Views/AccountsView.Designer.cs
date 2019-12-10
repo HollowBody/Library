@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.AddButton = new System.Windows.Forms.Button();
             this.AccountsGrid = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,9 +39,7 @@
             this.SerialField = new System.Windows.Forms.TextBox();
             this.NumberField = new System.Windows.Forms.TextBox();
             this.ChangeButton = new System.Windows.Forms.Button();
-            this.ErrorBox = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.AccountsGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ErrorBox)).BeginInit();
             this.SuspendLayout();
             // 
             // AddButton
@@ -105,8 +102,6 @@
             this.SurNameField.Name = "SurNameField";
             this.SurNameField.Size = new System.Drawing.Size(100, 20);
             this.SurNameField.TabIndex = 7;
-            this.SurNameField.Validating += new System.ComponentModel.CancelEventHandler(this.SurNameFieldOnValidating);
-            this.SurNameField.Validated += new System.EventHandler(this.SurNameField_Validated);
             // 
             // FirstNameField
             // 
@@ -114,8 +109,6 @@
             this.FirstNameField.Name = "FirstNameField";
             this.FirstNameField.Size = new System.Drawing.Size(100, 20);
             this.FirstNameField.TabIndex = 8;
-            this.FirstNameField.Validating += new System.ComponentModel.CancelEventHandler(this.FirstNameFieldOnValidating);
-            this.FirstNameField.Validated += new System.EventHandler(this.FirstNameField_Validated);
             // 
             // SerialField
             // 
@@ -123,8 +116,6 @@
             this.SerialField.Name = "SerialField";
             this.SerialField.Size = new System.Drawing.Size(100, 20);
             this.SerialField.TabIndex = 9;
-            this.SerialField.Validating += new System.ComponentModel.CancelEventHandler(this.SerialFieldOnValidating);
-            this.SerialField.Validated += new System.EventHandler(this.SerialField_Validated);
             // 
             // NumberField
             // 
@@ -132,8 +123,6 @@
             this.NumberField.Name = "NumberField";
             this.NumberField.Size = new System.Drawing.Size(100, 20);
             this.NumberField.TabIndex = 10;
-            this.NumberField.Validating += new System.ComponentModel.CancelEventHandler(this.NumberFieldOnValidating);
-            this.NumberField.Validated += new System.EventHandler(this.NumberField_Validated);
             // 
             // ChangeButton
             // 
@@ -144,10 +133,6 @@
             this.ChangeButton.Text = "Изменить";
             this.ChangeButton.UseVisualStyleBackColor = true;
             this.ChangeButton.Click += new System.EventHandler(this.ChangeButtonOnClick);
-            // 
-            // ErrorBox
-            // 
-            this.ErrorBox.ContainerControl = this;
             // 
             // AccountsView
             // 
@@ -170,7 +155,6 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccountsViewOnFormClosing);
             this.Load += new System.EventHandler(this.AccountsViewOnLoad);
             ((System.ComponentModel.ISupportInitialize)(this.AccountsGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ErrorBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -189,6 +173,5 @@
         private System.Windows.Forms.TextBox SerialField;
         private System.Windows.Forms.TextBox NumberField;
         private System.Windows.Forms.Button ChangeButton;
-        private System.Windows.Forms.ErrorProvider ErrorBox;
     }
 }

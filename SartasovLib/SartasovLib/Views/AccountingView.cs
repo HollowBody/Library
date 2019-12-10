@@ -28,18 +28,10 @@ namespace SartasovLib.Views
         }
         private async void AccountingViewOnLoad(object sender, EventArgs e)
         {
-            try
-            {
-                await AccountsLoad();
-                await LoadData();
-                await BooksLoad();
-                InitializeView();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка:Отсутствует подключение к Базе данных. \n{ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);               
-            }
-            
+            await AccountsLoad();
+            await LoadData();
+            await BooksLoad();
+            InitializeView();
         }
         private async Task LoadData()
         {
@@ -83,15 +75,8 @@ namespace SartasovLib.Views
         }
         private async void AddButtonOnClick(object sender, EventArgs e)
         {
-            try
-            {
-                await PostPenalty();
-                await LoadData();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка:Отсутствует подключение к Базе данных. \n{ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }            
+            await PostPenalty();
+            await LoadData();
         }
         private async Task PostPenalty()
         {
@@ -128,31 +113,6 @@ namespace SartasovLib.Views
         {
             Owner.Show();
             Owner.Refresh();
-        }
-
-        private void TypeFieldOnValidating(object sender, CancelEventArgs e)
-        {
-            string errorMsg;
-            if (!ValidType(TypeField.Text, out errorMsg))
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                TypeField.Select(0, TypeField.Text.Length);
-
-                // Set the ErrorProvider error with the text to display. 
-                ErrorBox.SetError(TypeField, errorMsg);
-            }
-        }
-
-        private bool ValidType(string type, out string errorMsg)
-        {
-            if (type.Length == 0 || !type.Any(char.IsDigit))
-            {
-                errorMsg = "type is required.";
-                return false;
-            }
-            errorMsg = "";
-            return true;
         }
     }
 }

@@ -23,15 +23,8 @@ namespace SartasovLib.Views
         }
         private async void AccountsViewOnLoad(object sender, EventArgs e)
         {
-            try
-            {
-                await LoadData();
-                InitializeView();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка:Отсутствует подключение к Базе данных. \n{ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            await LoadData();
+            InitializeView();
         }
         private async Task LoadData()
         {
@@ -50,7 +43,7 @@ namespace SartasovLib.Views
         {
             AccountsGrid.Columns[0].HeaderText = @"№";
             AccountsGrid.Columns[1].HeaderText = @"Абонемент";
-            AccountsGrid.Columns[2].Visible = false;
+            AccountsGrid.Columns[2].Visible =false;
             AccountsGrid.Columns[3].Visible = false;
             AccountsGrid.Columns[4].HeaderText = @"Имя";
             AccountsGrid.Columns[5].HeaderText = @"Фамилия";
@@ -58,22 +51,15 @@ namespace SartasovLib.Views
         }
         private async void AddButtonOnClick(object sender, EventArgs e)
         {
-            try
-            {
-                await PostLibraryAccount();
-                await LoadData();
-                InitializeView();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка:Отсутствует подключение к Базе данных. \n{ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            await PostLibraryAccount();
+            await LoadData();
+            InitializeView();
         }
         private async Task PostLibraryAccount()
         {
             if (!string.IsNullOrWhiteSpace(SurNameField.Text) && !string.IsNullOrWhiteSpace(FirstNameField.Text) && !string.IsNullOrWhiteSpace(SerialField.Text) && !string.IsNullOrWhiteSpace(NumberField.Text))
             {
-                var accountNumber = await GenerateAccountNumber();
+                var accountNumber = await GenerateAccountNumber();               
 
                 LibraryAccount libraryAccount = new LibraryAccount
                 {
@@ -143,98 +129,6 @@ namespace SartasovLib.Views
         {
             Owner.Show();
             Owner.Refresh();
-        }
-        private void SurNameFieldOnValidating(object sender, CancelEventArgs e)
-        {
-            string errorMsg;
-            if (!ValidStringField(SurNameField.Text, out errorMsg))
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                SurNameField.Select(0, SurNameField.Text.Length);
-
-                // Set the ErrorProvider error with the text to display. 
-                ErrorBox.SetError(SurNameField, errorMsg);
-            }
-
-        }
-        private void FirstNameFieldOnValidating(object sender, CancelEventArgs e)
-        {
-            string errorMsg;
-            if (!ValidStringField(FirstNameField.Text, out errorMsg))
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                FirstNameField.Select(0, FirstNameField.Text.Length);
-
-                // Set the ErrorProvider error with the text to display. 
-                ErrorBox.SetError(FirstNameField, errorMsg);
-            }
-        }
-        private bool ValidStringField(string field, out string errorMsg)
-        {
-            if (field.Length == 0 || !field.Any(char.IsDigit))
-            {
-                errorMsg = "SurName is required.";
-                return false;
-            }
-            errorMsg = "";
-            return true;
-        }
-        private void SerialFieldOnValidating(object sender, CancelEventArgs e)
-        {
-            string errorMsg;
-            if (!ValidIntField(SerialField.Text, out errorMsg))
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                SerialField.Select(0, SerialField.Text.Length);
-
-                // Set the ErrorProvider error with the text to display. 
-                ErrorBox.SetError(SerialField, errorMsg);
-            }
-        }
-        private void NumberFieldOnValidating(object sender, CancelEventArgs e)
-        {
-            string errorMsg;
-            if (!ValidIntField(NumberField.Text, out errorMsg))
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                NumberField.Select(0, NumberField.Text.Length);
-
-                // Set the ErrorProvider error with the text to display. 
-                ErrorBox.SetError(NumberField, errorMsg);
-            }
-        }
-        private bool ValidIntField(string field, out string errorMsg)
-        {
-            if (field.Length == 0 || !field.Any(char.IsLetter))
-            {
-                errorMsg = "SurName is required.";
-                return false;
-            }
-            errorMsg = "";
-            return true;
-        }
-        private void SurNameField_Validated(object sender, EventArgs e)
-        {
-            ErrorBox.SetError(SurNameField, "");
-        }
-
-        private void FirstNameField_Validated(object sender, EventArgs e)
-        {
-            ErrorBox.SetError(FirstNameField, "");
-        }
-
-        private void SerialField_Validated(object sender, EventArgs e)
-        {
-            ErrorBox.SetError(SerialField, "");
-        }
-
-        private void NumberField_Validated(object sender, EventArgs e)
-        {
-            ErrorBox.SetError(NumberField, "");
         }
     }
 }
