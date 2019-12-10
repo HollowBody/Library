@@ -28,10 +28,17 @@ namespace SartasovLib.Views
         }
         private async void AccountingViewOnLoad(object sender, EventArgs e)
         {
-            await AccountsLoad();
-            await LoadData();
-            await BooksLoad();
-            InitializeView();
+            try
+            {
+                await AccountsLoad();
+                await LoadData();
+                await BooksLoad();
+                InitializeView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка:{ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private async Task LoadData()
         {
@@ -75,8 +82,15 @@ namespace SartasovLib.Views
         }
         private async void AddButtonOnClick(object sender, EventArgs e)
         {
-            await PostPenalty();
-            await LoadData();
+            try
+            {
+                await PostPenalty();
+                await LoadData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка:{ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private async Task PostPenalty()
         {

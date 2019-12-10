@@ -23,8 +23,15 @@ namespace SartasovLib.Views
         }
         private async void AccountsViewOnLoad(object sender, EventArgs e)
         {
-            await LoadData();
-            InitializeView();
+            try
+            {
+                await LoadData();
+                InitializeView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка:{ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private async Task LoadData()
         {
@@ -43,7 +50,7 @@ namespace SartasovLib.Views
         {
             AccountsGrid.Columns[0].HeaderText = @"№";
             AccountsGrid.Columns[1].HeaderText = @"Абонемент";
-            AccountsGrid.Columns[2].Visible =false;
+            AccountsGrid.Columns[2].Visible = false;
             AccountsGrid.Columns[3].Visible = false;
             AccountsGrid.Columns[4].HeaderText = @"Имя";
             AccountsGrid.Columns[5].HeaderText = @"Фамилия";
@@ -51,15 +58,22 @@ namespace SartasovLib.Views
         }
         private async void AddButtonOnClick(object sender, EventArgs e)
         {
-            await PostLibraryAccount();
-            await LoadData();
-            InitializeView();
+            try
+            {
+                await PostLibraryAccount();
+                await LoadData();
+                InitializeView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка:{ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private async Task PostLibraryAccount()
         {
             if (!string.IsNullOrWhiteSpace(SurNameField.Text) && !string.IsNullOrWhiteSpace(FirstNameField.Text) && !string.IsNullOrWhiteSpace(SerialField.Text) && !string.IsNullOrWhiteSpace(NumberField.Text))
             {
-                var accountNumber = await GenerateAccountNumber();               
+                var accountNumber = await GenerateAccountNumber();
 
                 LibraryAccount libraryAccount = new LibraryAccount
                 {
