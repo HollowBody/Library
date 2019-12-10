@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.AccountingGrid = new System.Windows.Forms.DataGridView();
             this.AddButton = new System.Windows.Forms.Button();
             this.UpdateButton = new System.Windows.Forms.Button();
@@ -41,7 +42,9 @@
             this.TypeField = new System.Windows.Forms.TextBox();
             this.IssueDatePicker = new System.Windows.Forms.DateTimePicker();
             this.CompletionDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.ErrorBox = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.AccountingGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorBox)).BeginInit();
             this.SuspendLayout();
             // 
             // AccountingGrid
@@ -139,6 +142,7 @@
             this.TypeField.Name = "TypeField";
             this.TypeField.Size = new System.Drawing.Size(125, 20);
             this.TypeField.TabIndex = 10;
+            this.TypeField.Validating += new System.ComponentModel.CancelEventHandler(this.TypeFieldOnValidating);
             // 
             // IssueDatePicker
             // 
@@ -153,6 +157,10 @@
             this.CompletionDatePicker.Name = "CompletionDatePicker";
             this.CompletionDatePicker.Size = new System.Drawing.Size(200, 20);
             this.CompletionDatePicker.TabIndex = 12;
+            // 
+            // ErrorBox
+            // 
+            this.ErrorBox.ContainerControl = this;
             // 
             // AccountingView
             // 
@@ -177,6 +185,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccountingViewOnFormClosing);
             this.Load += new System.EventHandler(this.AccountingViewOnLoad);
             ((System.ComponentModel.ISupportInitialize)(this.AccountingGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -197,5 +206,6 @@
         private System.Windows.Forms.TextBox TypeField;
         private System.Windows.Forms.DateTimePicker IssueDatePicker;
         private System.Windows.Forms.DateTimePicker CompletionDatePicker;
+        private System.Windows.Forms.ErrorProvider ErrorBox;
     }
 }
