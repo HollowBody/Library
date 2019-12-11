@@ -128,5 +128,33 @@ namespace SartasovLib.Views
             Owner.Show();
             Owner.Refresh();
         }
+
+        private void ReportOnClick(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+            app.Visible = true;
+            worksheet = workbook.Sheets["Лист1"];
+            worksheet = workbook.ActiveSheet;
+            for (int i = 1; i < AccountingGrid.Columns.Count + 1; i++)
+            {
+                worksheet.Cells[1, i] = AccountingGrid.Columns[i - 1].HeaderText;
+            }
+            for (int i = 0; i < AccountingGrid.Rows.Count - 1; i++)
+            {
+                for (int j = 0; j < AccountingGrid.Columns.Count; j++)
+                {
+                    if (AccountingGrid.Rows[i].Cells[j].Value != null)
+                    {
+                        worksheet.Cells[i + 2, j + 1] = AccountingGrid.Rows[i].Cells[j].Value.ToString();
+                    }
+                    else
+                    {
+                        worksheet.Cells[i + 2, j + 1] = "";
+                    }
+                }
+            }
+        }
     }
 }

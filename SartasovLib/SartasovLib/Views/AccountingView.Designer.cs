@@ -41,6 +41,7 @@
             this.TypeField = new System.Windows.Forms.TextBox();
             this.IssueDatePicker = new System.Windows.Forms.DateTimePicker();
             this.CompletionDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.Report = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.AccountingGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -154,11 +155,22 @@
             this.CompletionDatePicker.Size = new System.Drawing.Size(200, 20);
             this.CompletionDatePicker.TabIndex = 12;
             // 
+            // Report
+            // 
+            this.Report.Location = new System.Drawing.Point(12, 415);
+            this.Report.Name = "Report";
+            this.Report.Size = new System.Drawing.Size(75, 23);
+            this.Report.TabIndex = 13;
+            this.Report.Text = "Отчет";
+            this.Report.UseVisualStyleBackColor = true;
+            this.Report.Click += new System.EventHandler(this.ReportOnClick);
+            // 
             // AccountingView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Report);
             this.Controls.Add(this.CompletionDatePicker);
             this.Controls.Add(this.IssueDatePicker);
             this.Controls.Add(this.TypeField);
@@ -197,5 +209,6 @@
         private System.Windows.Forms.TextBox TypeField;
         private System.Windows.Forms.DateTimePicker IssueDatePicker;
         private System.Windows.Forms.DateTimePicker CompletionDatePicker;
+        private System.Windows.Forms.Button Report;
     }
 }
